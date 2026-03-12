@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Falar no WhatsApp sem salvar número</title>
+
+<meta name="description" content="Abra uma conversa no WhatsApp sem salvar o número. Cole o telefone e fale direto em segundos.">
+
+<link rel="canonical" href="https://zapdireto.github.io">
+
+<style>
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+background:#f2f2f2;
+margin:0;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+}
+
+.container{
+background:white;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+max-width:500px;
+width:90%;
+text-align:center;
+}
+
+h1{
+color:#075E54;
+margin-bottom:10px;
+}
+
+p{
+color:#444;
+margin-bottom:25px;
+}
+
+input{
+width:100%;
+padding:15px;
+font-size:18px;
+border-radius:8px;
+border:1px solid #ccc;
+margin-bottom:20px;
+}
+
+button{
+background:#25D366;
+color:white;
+border:none;
+padding:15px;
+font-size:18px;
+width:100%;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1ebe5b;
+}
+
+footer{
+margin-top:20px;
+font-size:13px;
+color:#777;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Falar no WhatsApp sem salvar número</h1>
+
+<p>Cole o telefone abaixo e abra a conversa direto.</p>
+
+<input
+id="telefone"
+type="tel"
+inputmode="numeric"
+placeholder="Ex: (11) 91234-5678"
+/>
+
+<button onclick="abrirWhatsapp()">
+Abrir conversa
+</button>
+
+<footer>
+Ferramenta simples para abrir conversa no WhatsApp.
+</footer>
+
+</div>
+
+<script>
+
+function abrirWhatsapp(){
+
+let input = document.getElementById("telefone").value;
+
+let numero = input.replace(/\D/g,'');
+
+if(numero.startsWith("0") && !numero.startsWith("00")){
+numero = numero.substring(1);
+}
+
+if(numero.startsWith("00")){
+numero = numero.substring(2);
+}
+
+if(numero.length < 10){
+alert("Digite um telefone com DDD");
+return;
+}
+
+if(numero.length > 13){
+alert("Telefone inválido");
+return;
+}
+
+if(numero.length === 10 || numero.length === 11){
+numero = "55" + numero;
+}
+
+let url = "https://wa.me/" + numero;
+
+window.open(url,"_blank");
+
+}
+
+document.getElementById("telefone")
+.addEventListener("keypress",function(e){
+
+if(e.key === "Enter"){
+abrirWhatsapp();
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
