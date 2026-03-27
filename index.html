@@ -3,152 +3,377 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Falar no WhatsApp sem salvar número</title>
+    <title>ZapDireto — Envie mensagem no WhatsApp sem salvar número</title>
 
-<meta name="description" content="Abra uma conversa no WhatsApp sem salvar o número. Cole o telefone e fale direto em segundos.">
+    <meta name="description"
+        content="Digite ou cole qualquer número e abra uma conversa no WhatsApp sem salvar contato. Simples, rápido e direto.">
 
-<link rel="canonical" href="https://zapdireto.github.io">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#25D366">
 
-<style>
+    <link rel="icon" type="image/png" href="logo.png">
 
-body{
-font-family: Arial, Helvetica, sans-serif;
-background:#f2f2f2;
-margin:0;
-display:flex;
-align-items:center;
-justify-content:center;
-height:100vh;
-}
+    <meta property="og:title" content="ZapDireto — WhatsApp sem salvar número">
+    <meta property="og:description" content="Digite ou cole qualquer telefone e abra a conversa direto no WhatsApp.">
+    <meta property="og:type" content="website">
 
-.container{
-background:white;
-padding:40px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-max-width:500px;
-width:90%;
-text-align:center;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-h1{
-color:#075E54;
-margin-bottom:10px;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(#ffffff, #f3f7f3);
+            color: #1a2e1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-p{
-color:#444;
-margin-bottom:25px;
-}
+        /* HEADER */
 
-input{
-width:100%;
-padding:15px;
-font-size:18px;
-border-radius:8px;
-border:1px solid #ccc;
-margin-bottom:20px;
-}
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 28px;
+            border-bottom: 1px solid #e6efe6;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
 
-button{
-background:#25D366;
-color:white;
-border:none;
-padding:15px;
-font-size:18px;
-width:100%;
-border-radius:8px;
-cursor:pointer;
-}
+        .logo {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-button:hover{
-background:#1ebe5b;
-}
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
 
-footer{
-margin-top:20px;
-font-size:13px;
-color:#777;
-}
+        .brand-name {
+            font-size: 24px;
+            font-weight: 700;
+        }
 
-</style>
+        .brand-tagline {
+            font-size: 13px;
+            color: #6b8068;
+            margin-top: 3px;
+        }
+
+        /* MAIN */
+
+        .main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .main::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 220px;
+            background: linear-gradient(180deg,
+                    rgba(37, 211, 102, 0.08),
+                    rgba(37, 211, 102, 0.15),
+                    rgba(37, 211, 102, 0.08));
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        /* FORM */
+
+        .form {
+            width: 100%;
+            max-width: 460px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* INPUT */
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input {
+            width: 100%;
+            height: 64px;
+            border-radius: 16px;
+            border: 2px solid #d4e5d4;
+            font-size: 20px;
+            padding-left: 56px;
+            padding-right: 56px;
+            outline: none;
+        }
+
+        .input:focus {
+            border-color: #25D366;
+        }
+
+        .input::placeholder {
+            color: #8fa38f;
+        }
+
+        /* ICON */
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            fill: #25D366;
+        }
+
+        /* HELP */
+
+        .help-wrapper {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .help-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid #d4e5d4;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            color: #6b8068;
+        }
+
+        /* TOOLTIP */
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            right: 0;
+            bottom: 44px;
+            background: white;
+            border: 1px solid #dbe8db;
+            padding: 16px;
+            border-radius: 12px;
+            width: 240px;
+            font-size: 14px;
+            line-height: 1.5;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            color: #243424;
+        }
+
+        .tooltip-title {
+            display: block;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 6px;
+            color: #1e2f1e;
+        }
+
+        .tooltip p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* BUTTON */
+
+        .submit-btn {
+            height: 56px;
+            border: none;
+            border-radius: 14px;
+            background: #25D366;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #1ebe5b;
+        }
+
+        .submit-btn:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+        }
+
+        /* TEXT */
+
+        .tagline {
+            text-align: center;
+            font-size: 14px;
+            color: #6b8068;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 13px;
+            color: #6b8068;
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="container">
+    <header class="header">
 
-<h1>Falar no WhatsApp sem salvar número</h1>
+        <div class="logo">
+            <img src="logo.png" alt="ZapDireto">
+        </div>
 
-<p>Cole o telefone abaixo e abra a conversa direto.</p>
+        <div>
+            <div class="brand-name">ZapDireto</div>
+            <div class="brand-tagline">Sem salvar. Sem formatar. Direto.</div>
+        </div>
 
-<input
-id="telefone"
-type="tel"
-inputmode="numeric"
-placeholder="Ex: (11) 91234-5678"
-/>
+    </header>
 
-<button onclick="abrirWhatsapp()">
-Abrir conversa
-</button>
+    <main class="main">
 
-<footer>
-Ferramenta simples para abrir conversa no WhatsApp.
-</footer>
+        <form class="form" id="form">
 
-</div>
+            <div class="input-wrapper">
 
-<script>
+                <svg class="input-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.501A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.028-1.38l-.36-.214-3.76.891.952-3.653-.234-.374A9.818 9.818 0 1112 21.818z" />
+                </svg>
 
-function abrirWhatsapp(){
+                <input id="phone" class="input" type="tel" placeholder="Digite ou cole o número" inputmode="numeric"
+                    autocomplete="off" autofocus>
 
-let input = document.getElementById("telefone").value;
+                <div class="help-wrapper">
 
-let numero = input.replace(/\D/g,'');
+                    <button type="button" class="help-btn" id="help">?</button>
 
-if(numero.startsWith("0") && !numero.startsWith("00")){
-numero = numero.substring(1);
-}
+                    <div class="tooltip" id="tooltip">
 
-if(numero.startsWith("00")){
-numero = numero.substring(2);
-}
+                        <strong class="tooltip-title">
+                            Pode colar o número de qualquer jeito.
+                        </strong>
 
-if(numero.length < 10){
-alert("Digite um telefone com DDD");
-return;
-}
+                        <p>
+                            Espaços, traços, parênteses ou código do país não são problema.
+                            A gente organiza tudo automaticamente antes de abrir o WhatsApp.
+                        </p>
 
-if(numero.length > 13){
-alert("Telefone inválido");
-return;
-}
+                    </div>
+                </div>
 
-if(numero.length === 10 || numero.length === 11){
-numero = "55" + numero;
-}
+            </div>
 
-let url = "https://wa.me/" + numero;
+            <button id="submit" class="submit-btn" disabled>
+                Abrir no WhatsApp
+            </button>
 
-window.open(url,"_blank");
+            <p class="tagline">
+                Pra você o importante é a mensagem. O resto a gente faz.
+            </p>
 
-}
+        </form>
 
-document.getElementById("telefone")
-.addEventListener("keypress",function(e){
+    </main>
 
-if(e.key === "Enter"){
-abrirWhatsapp();
-}
+    <footer class="footer">
+        Nada é salvo. Tudo roda no seu navegador.
+    </footer>
 
-});
+    <script>
 
-</script>
+        const phoneInput = document.getElementById("phone")
+        const submitBtn = document.getElementById("submit")
+        const form = document.getElementById("form")
+        const helpBtn = document.getElementById("help")
+        const tooltip = document.getElementById("tooltip")
+
+        function cleanNumber(number) {
+
+            let n = number.replace(/\D/g, "")
+
+            if (n.startsWith("0") && !n.startsWith("00")) {
+                n = n.substring(1)
+            }
+
+            if (n.startsWith("00")) {
+                n = n.substring(2)
+            }
+
+            if (n.length === 10 || n.length === 11) {
+                n = "55" + n
+            }
+
+            return n
+        }
+
+        function isValid(number) {
+            return number.replace(/\D/g, "").length >= 8
+        }
+
+        phoneInput.addEventListener("input", () => {
+            submitBtn.disabled = !isValid(phoneInput.value)
+        })
+
+        form.addEventListener("submit", (e) => {
+
+            e.preventDefault()
+
+            if (!isValid(phoneInput.value)) return
+
+            const number = cleanNumber(phoneInput.value)
+
+            window.open(
+                "https://wa.me/" + number,
+                "_blank",
+                "noopener,noreferrer"
+            )
+
+        })
+
+        helpBtn.addEventListener("click", (e) => {
+            e.stopPropagation()
+            tooltip.classList.toggle("open")
+        })
+
+        document.addEventListener("click", () => {
+            tooltip.classList.remove("open")
+        })
+
+    </script>
 
 </body>
 
