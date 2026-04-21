@@ -17,17 +17,21 @@
     <meta property="og:url" content="https://zapdireto.github.io/">
     <meta property="og:title" content="ZapDireto — WhatsApp sem salvar contato">
     <meta property="og:description" content="Abra conversas no WhatsApp sem salvar o número. Rápido, seguro e gratuito.">
-    <meta property="og:image" content="logo.png">
+    <meta property="og:image" content="favicon/web-app-manifest-512.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://zapdireto.github.io/">
     <meta property="twitter:title" content="ZapDireto — WhatsApp sem salvar contato">
     <meta property="twitter:description" content="A forma mais rápida de iniciar uma conversa no WhatsApp.">
-    <meta property="twitter:image" content="logo.png">
+    <meta property="twitter:image" content="favicon/web-app-manifest-512.png">
 
-    <!-- Favicon e Cor do Tema -->
-    <link rel="icon" type="image/png" href="logo.png">
+    <!-- Favicons (Ajustados para a pasta /favicon) -->
+    <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
     <meta name="theme-color" content="#25D366">
 
     <!-- JSON-LD: Dados Estruturados para o Google -->
@@ -85,6 +89,9 @@
         .logo {
             width: 36px;
             height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo img {
@@ -334,7 +341,7 @@
             margin-top: auto;
         }
 
-        /* Conteúdo extra para SEO (Melhora o ranking mas não atrapalha o design) */
+        /* Conteúdo extra para SEO */
         .seo-text {
             position: absolute;
             width: 1px;
@@ -358,7 +365,7 @@
 
     <header class="header">
         <div class="logo">
-            <img src="logo.png" alt="ZapDireto Logo">
+            <img src="favicon/favicon-96x96.png" alt="ZapDireto - Abrir conversa no WhatsApp sem salvar contato">
         </div>
         <p class="brand-name">ZapDireto</p>
     </header>
@@ -369,7 +376,6 @@
             
             <h1 class="hero-title">Direto para o <span>WhatsApp.</span></h1>
 
-            <!-- Texto oculto para indexação de palavras-chave -->
             <div class="seo-text">
                 <h2>Como abrir conversa no WhatsApp sem salvar o contato?</h2>
                 <p>O ZapDireto permite que você inicie uma conversa instantânea apenas digitando o número de telefone com DDD. Ideal para vendas, orçamentos e conversas rápidas.</p>
