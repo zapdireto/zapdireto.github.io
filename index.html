@@ -6,27 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- SEO Primário -->
-    <title>ZapDireto — Abrir WhatsApp sem salvar número (Link Direto)</title>
-    <meta name="description" content="Envie mensagens no WhatsApp instantaneamente sem precisar adicionar o contato à sua agenda. Ferramenta gratuita, rápida e segura para criar links diretos.">
-    <meta name="keywords" content="whatsapp sem salvar, link whatsapp, zap direto, abrir conversa whatsapp, gerar link whatsapp">
+    <title>ZapDireto — Iniciar conversa no WhatsApp sem salvar o contato</title>
+    <meta name="description" content="A forma mais fácil de enviar mensagens no WhatsApp sem salvar o número. Copie e cole em qualquer formato, o ZapDireto organiza tudo sozinho e abre o chat na hora.">
+    <meta name="keywords" content="whatsapp sem salvar, link whatsapp, zap direto, abrir conversa whatsapp, gerar link whatsapp, colar numero whatsapp, mandar zap sem salvar">
     <meta name="author" content="ZapDireto">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://zapdireto.github.io/">
+
+    <!-- Preconnect: Acelera a abertura do WhatsApp -->
+    <link rel="preconnect" href="https://api.whatsapp.com">
+    <link rel="preconnect" href="https://wa.me">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://zapdireto.github.io/">
-    <meta property="og:title" content="ZapDireto — WhatsApp sem salvar contato">
-    <meta property="og:description" content="Abra conversas no WhatsApp sem salvar o número. Rápido, seguro e gratuito.">
+    <meta property="og:title" content="ZapDireto — Fale no WhatsApp sem salvar o número">
+    <meta property="og:description" content="Copie e cole o número em qualquer formato e inicie a conversa na hora, sem lotar sua agenda.">
     <meta property="og:image" content="favicon/web-app-manifest-512.png">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://zapdireto.github.io/">
-    <meta property="twitter:title" content="ZapDireto — WhatsApp sem salvar contato">
-    <meta property="twitter:description" content="A forma mais rápida de iniciar uma conversa no WhatsApp.">
-    <meta property="twitter:image" content="favicon/web-app-manifest-512.png">
-
-    <!-- Favicons (Ajustados para a pasta /favicon) -->
+    <!-- Favicons -->
     <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
     <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
@@ -34,330 +32,136 @@
     <link rel="manifest" href="favicon/site.webmanifest">
     <meta name="theme-color" content="#25D366">
 
-    <!-- JSON-LD: Dados Estruturados para o Google -->
+    <!-- JSON-LD: WebApp + FAQPage (Combo para dominar a busca) -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "ZapDireto",
-      "url": "https://zapdireto.github.io/",
-      "description": "Ferramenta para abrir conversas no WhatsApp sem precisar salvar o número na agenda de contatos.",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "BRL"
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ZapDireto",
+        "url": "https://zapdireto.github.io/",
+        "description": "Ferramenta gratuita para abrir conversas no WhatsApp sem salvar o número. Aceita números com espaços, traços e parênteses.",
+        "applicationCategory": "CommunicationApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Como mandar WhatsApp para quem não é contato?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Basta copiar o número com DDD, colar no ZapDireto e clicar em iniciar conversa. O site limpa o número e abre o chat oficial sem precisar salvar na agenda."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "O ZapDireto é seguro?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim, é 100% seguro. O ZapDireto não salva números nem mensagens. Todo o processo ocorre no seu navegador e o link redireciona para o WhatsApp oficial."
+            }
+          }
+        ]
       }
-    }
+    ]
     </script>
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        :root {
+            --primary: #25D366;
+            --primary-dark: #128C7E;
+            --text-dark: #1a2e1a;
+            --bg-light: #f7faf7;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background:
-                radial-gradient(circle at 30% 30%, rgba(37,211,102,0.12), transparent 40%),
-                radial-gradient(circle at 70% 70%, rgba(37,211,102,0.06), transparent 50%),
-                #f7faf7;
-            color: #1a2e1a;
+            background: radial-gradient(circle at 30% 30%, rgba(37,211,102,0.12), transparent 40%), var(--bg-light);
+            color: var(--text-dark);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            line-height: 1.6;
         }
 
-        /* HEADER */
         .header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 24px;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            display: flex; align-items: center; gap: 12px; padding: 14px 24px;
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;
         }
 
-        .logo {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .brand-name { font-size: 1.2rem; font-weight: 800; }
 
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+        .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
 
-        .brand-name {
-            font-size: 18px;
-            font-weight: 800;
-            color: #1a2e1a;
-        }
+        .hero-section { width: 100%; max-width: 550px; text-align: center; margin-bottom: 40px; }
 
-        /* MAIN */
-        .main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 24px;
-        }
+        .hero-title { font-size: 2.8rem; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 24px; }
+        .hero-title span { color: var(--primary); }
 
-        .content-container {
-            width: 100%;
-            max-width: 480px;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-        }
+        .form-card { background: white; padding: 32px; border-radius: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); margin-bottom: 24px; position: relative; }
 
-        .hero-title {
-            font-size: 42px;
-            font-weight: 800;
-            letter-spacing: -2px;
-            line-height: 1;
-            margin-bottom: 48px;
-            color: #1a2e1a;
-        }
-
-        .hero-title span {
-            color: #25D366;
-        }
-
-        /* FORM */
-        .form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
+        .input-wrapper { position: relative; margin-bottom: 24px; }
 
         .input {
-            width: 100%;
-            height: 84px;
-            border-radius: 24px;
-            border: 2.5px solid #e1e8e1;
-            font-size: 18px;
-            font-weight: 600;
-            padding: 0 60px 0 64px;
-            outline: none;
-            background: #ffffff;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%; height: 80px; border-radius: 20px; border: 2.5px solid #e1e8e1;
+            font-size: 1.1rem; font-weight: 600; padding: 0 60px 0 64px; outline: none; transition: all 0.3s ease;
+            color: var(--text-dark);
         }
 
-        .input:focus {
-            border-color: #25D366;
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.15);
-        }
+        .input::placeholder { color: #b0c0b0; font-weight: 500; font-size: 0.95rem; }
 
-        .input.validated {
-            border-color: #25D366;
-            background: #fafffa;
-        }
+        .input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.1); }
+        .input.valid { border-color: var(--primary); background: #fafffa; }
 
-        .input.pasted {
-            animation: inputBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
+        .input-icon { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); width: 24px; fill: var(--primary); opacity: 0.8; }
 
-        @keyframes inputBounce {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 24px;
-            height: 24px;
-            fill: #25D366;
-            opacity: 0.8;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .help-trigger {
-            position: absolute;
-            right: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 28px;
-            height: 28px;
-            background: #f0f4f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #6b8068;
-            font-weight: bold;
-            font-size: 15px;
-            z-index: 3;
-            transition: all 0.2s;
-            border: 2px solid transparent;
-        }
-
-        .help-trigger:hover {
-            background: #e1e8e1;
-            color: #1a2e1a;
-            border-color: #dcecdc;
+        .help-btn {
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            width: 28px; height: 28px; background: #f0f4f0; border: none; border-radius: 50%;
+            color: #6b8068; font-weight: bold; font-size: 16px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; z-index: 10;
         }
 
         .tooltip {
-            position: absolute;
-            right: 0;
-            bottom: calc(100% + 12px);
-            width: 280px;
-            background: #1a2e1a;
-            color: #ffffff;
-            padding: 16px;
-            border-radius: 16px;
-            font-size: 14px;
-            text-align: left;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 10;
-            line-height: 1.5;
+            position: absolute; bottom: calc(100% + 15px); right: 0; width: 280px;
+            background: var(--text-dark); color: white; padding: 16px; border-radius: 16px;
+            font-size: 0.9rem; opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s ease; z-index: 20; text-align: left;
         }
 
-        .tooltip.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
+        .tooltip.active { opacity: 1; visibility: visible; transform: translateY(0); }
 
-        .tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            right: 28px;
-            border-width: 8px;
-            border-style: solid;
-            border-color: #1a2e1a transparent transparent transparent;
-        }
-
-        .input::placeholder {
-            color: #b0c0b0;
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        /* SUBMIT BUTTON */
         .submit-btn {
-            height: 76px;
-            border: none;
-            border-radius: 24px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            font-size: 18px;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            width: 100%; height: 76px; border: none; border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; font-size: 1.1rem; font-weight: 800; cursor: pointer;
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.3); transition: all 0.2s;
         }
 
-        .submit-btn.active {
-            animation: btnPulse 2s infinite;
-        }
+        .submit-btn:disabled { background: #e4ebe4; color: #b4c4b4; box-shadow: none; cursor: not-allowed; }
 
-        @keyframes btnPulse {
-            0% { transform: scale(1); box-shadow: 0 12px 30px rgba(37, 211, 102, 0.3); }
-            50% { transform: scale(1.02); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4); }
-            100% { transform: scale(1); box-shadow: 0 12px 30px rgba(37, 211, 102, 0.3); }
-        }
+        .philosophy-msg { font-size: 1.1rem; color: #4a5d4a; font-weight: 500; margin-top: 32px; }
+        .philosophy-msg strong { color: var(--primary-dark); font-weight: 700; }
 
-        .submit-btn:hover:not(:disabled) {
-            filter: brightness(1.05);
-        }
+        .trust-badges { color: #6b8068; font-weight: 700; font-size: 0.9rem; margin-top: 10px; }
 
-        .submit-btn:disabled {
-            background: #e4ebe4;
-            color: #b4c4b4;
-            box-shadow: none;
-            cursor: not-allowed;
-        }
+        .seo-content { width: 100%; max-width: 800px; background: white; padding: 40px; border-radius: 32px; margin-top: 20px; text-align: left; }
+        .seo-content h2 { color: var(--primary-dark); margin: 32px 0 16px; font-size: 1.6rem; border-bottom: 2px solid var(--bg-light); padding-bottom: 8px; }
+        
+        .faq-block { margin-bottom: 24px; }
+        .faq-block h3 { font-size: 1.1rem; color: var(--text-dark); margin-bottom: 8px; font-weight: 700; }
+        .faq-block p { color: #4a5d4a; font-size: 1rem; margin-bottom: 16px; }
 
-        /* PHILOSOPHY */
-        .philosophy-msg {
-            font-size: 16px;
-            color: #4a5d4a;
-            font-weight: 500;
-            margin-bottom: 40px;
-            line-height: 1.4;
-        }
+        .footer { padding: 40px 20px; text-align: center; font-size: 0.9rem; color: #8899a6; background: white; border-top: 1px solid #eee; margin-top: 40px; }
 
-        .philosophy-msg strong {
-            color: #128C7E;
-            font-weight: 700;
-        }
-
-        /* TRUST SECTION */
-        .trust-section {
-            padding-top: 32px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .trust-badges {
-            font-size: 13px;
-            font-weight: 700;
-            color: #6b8068;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-
-        /* FOOTER */
-        .footer {
-            padding: 30px;
-            text-align: center;
-            font-size: 12px;
-            color: #bdcbd0;
-            margin-top: auto;
-        }
-
-        /* Conteúdo extra para SEO */
-        .seo-text {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
-        @media (max-width: 480px) {
-            .hero-title { font-size: 34px; margin-bottom: 32px; }
-            .input { height: 76px; font-size: 16px; padding-left: 56px; padding-right: 56px; }
-            .submit-btn { height: 70px; font-size: 16px; }
-        }
+        @media (max-width: 600px) { .hero-title { font-size: 2.2rem; } .seo-content { padding: 24px; border-radius: 0; } }
     </style>
 </head>
 
@@ -365,160 +169,149 @@
 
     <header class="header">
         <div class="logo">
-            <img src="favicon/favicon-96x96.png" alt="ZapDireto - Abrir conversa no WhatsApp sem salvar contato">
+            <img src="favicon/favicon-96x96.png" alt="ZapDireto - Abrir WhatsApp sem salvar" width="36" height="36">
         </div>
         <p class="brand-name">ZapDireto</p>
     </header>
 
     <main class="main">
-
-        <section class="content-container">
+        <section class="hero-section">
+            <h1 class="hero-title">Fale no WhatsApp <span>sem precisar salvar o número.</span></h1>
             
-            <h1 class="hero-title">Direto para o <span>WhatsApp.</span></h1>
+            <div class="form-card">
+                <form id="form" aria-label="Gerador de link para WhatsApp">
+                    <div class="input-wrapper">
+                        <div id="tooltip" class="tooltip">
+                            <strong>Pode copiar e colar aqui!</strong><br>
+                            Não se preocupe com espaços, parênteses ou traços. O ZapDireto limpa tudo e abre a conversa na hora.
+                        </div>
 
-            <div class="seo-text">
-                <h2>Como abrir conversa no WhatsApp sem salvar o contato?</h2>
-                <p>O ZapDireto permite que você inicie uma conversa instantânea apenas digitando o número de telefone com DDD. Ideal para vendas, orçamentos e conversas rápidas.</p>
-            </div>
-
-            <form class="form" id="form" aria-label="Gerador de link direto para WhatsApp">
-
-                <div class="input-wrapper">
-                    <div id="tooltip" class="tooltip" role="tooltip">
-                        <strong>Pode colar de qualquer jeito!</strong><br>
-                        Espaços, traços, parênteses ou código do país não são problema. Organizamos tudo automaticamente.
+                        <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.501A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.028-1.38l-.36-.214-3.76.891.952-3.653-.234-.374A9.818 9.818 0 1112 21.818z" />
+                        </svg>
+                        
+                        <input id="phone" class="input" type="tel" placeholder="Cole ou escreva o número aqui em qualquer formato..." aria-label="Digite o número de celular" inputmode="numeric" autocomplete="off" autofocus>
+                        
+                        <button type="button" id="help-btn" class="help-btn" aria-label="Mais informações">?</button>
                     </div>
-                    
-                    <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.501A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.028-1.38l-.36-.214-3.76.891.952-3.653-.234-.374A9.818 9.818 0 1112 21.818z" />
-                    </svg>
-                    
-                    <input id="phone" class="input" type="tel" placeholder="Número em qualquer formato..." aria-label="Digite o número do celular com DDD" inputmode="numeric" autocomplete="off" autofocus>
-                    
-                    <button type="button" id="help-btn" class="help-trigger" aria-haspopup="true" aria-label="Mais informações sobre o formato do número">?</button>
-                </div>
 
-                <button id="submit" class="submit-btn" disabled>
-                    Iniciar conversa agora
-                </button>
-
-            </form>
+                    <button id="submit" class="submit-btn" disabled>
+                        Falar agora por WhatsApp
+                    </button>
+                </form>
+            </div>
+            
+            <p class="trust-badges">⚡ Link Instantâneo • 🔒 100% Privado • 📱 Todos os DDDs</p>
 
             <div class="philosophy-msg">
                 Para você o importante é a <strong>mensagem</strong>.<br>O resto o ZapDireto faz.
             </div>
-
-            <section class="trust-section">
-                <div class="trust-badges">
-                    <span>⚡ Link Instantâneo</span>
-                    <span>•</span>
-                    <span>🔒 100% Privado</span>
-                    <span>•</span>
-                    <span>📱 Todos os DDDs</span>
-                </div>
-                <p class="privacy-note">Nada é salvo em nossos servidores. Tudo ocorre no seu navegador.</p>
-            </section>
         </section>
 
+        <section class="seo-content">
+            <h2>Dúvidas Frequentes</h2>
+
+            <div class="faq-block">
+                <h3>Como abrir conversa no WhatsApp sem salvar o contato?</h3>
+                <p>É muito simples: basta copiar o número desejado e colá-lo no campo acima. O ZapDireto remove automaticamente espaços, parênteses e traços, criando um link direto e seguro para o chat oficial do WhatsApp.</p>
+            </div>
+
+            <div class="faq-block">
+                <h3>O ZapDireto é seguro?</h3>
+                <p>Totalmente. Não guardamos nenhum número nos nossos servidores. Todo o processo de limpeza do número ocorre diretamente no seu navegador (celular ou PC), garantindo que a sua privacidade e a do seu contato sejam preservadas.</p>
+            </div>
+
+            <div class="faq-block">
+                <h3>Como mandar zap sem salvar o número no celular?</h3>
+                <p>Ferramentas como o ZapDireto permitem "pular" a etapa de salvar o contato. Você digita o DDD e o número, e nós geramos o comando que abre o aplicativo do WhatsApp imediatamente na tela de conversa.</p>
+            </div>
+
+            <div class="faq-block">
+                <h3>Funciona com números internacionais?</h3>
+                <p>Sim. Se o número copiado já contiver o código do país (ex: +1 para EUA), o ZapDireto irá respeitá-lo. Se colar apenas o DDD e o número do Brasil, nós adicionamos automaticamente o código (+55).</p>
+            </div>
+
+            <div class="faq-block">
+                <h3>Posso usar no computador (WhatsApp Web)?</h3>
+                <p>Com certeza. O ZapDireto é compatível com celulares (Android e iPhone), computadores e tablets. No PC, o link abrirá o WhatsApp Web ou o aplicativo oficial instalado.</p>
+            </div>
+
+            <h2>Vantagens de usar o link direto para WhatsApp</h2>
+            <p>Usar um gerador de link direto ajuda a manter sua agenda organizada. É ideal para falar com vendedores do Mercado Livre, OLX, solicitar orçamentos rápidos ou contatar prestadores de serviços sem lotar sua lista de contatos com pessoas que você falará apenas uma vez.</p>
+        </section>
     </main>
 
     <footer class="footer">
-        © <script>document.write(new Date().getFullYear())</script> ZapDireto — O jeito mais fácil de abrir o WhatsApp.
+        <p>© <script>document.write(new Date().getFullYear())</script> ZapDireto — O jeito mais fácil de abrir o WhatsApp.</p>
     </footer>
 
     <script>
-        const phoneInput = document.getElementById("phone")
-        const submitBtn = document.getElementById("submit")
-        const helpBtn = document.getElementById("help-btn")
-        const tooltip = document.getElementById("tooltip")
-        const form = document.getElementById("form")
+        const phoneInput = document.getElementById("phone");
+        const submitBtn = document.getElementById("submit");
+        const form = document.getElementById("form");
+        const helpBtn = document.getElementById("help-btn");
+        const tooltip = document.getElementById("tooltip");
 
         helpBtn.addEventListener("click", (e) => {
-            e.stopPropagation()
-            tooltip.classList.toggle("active")
-        })
+            e.stopPropagation();
+            tooltip.classList.toggle("active");
+        });
 
         document.addEventListener("click", () => {
-            tooltip.classList.remove("active")
-        })
+            tooltip.classList.remove("active");
+        });
 
         function cleanNumber(number) {
-            let n = number.replace(/\D/g, "")
-            if (n.startsWith("0") && !n.startsWith("00")) {
-                n = n.substring(1)
-            }
-            if (n.startsWith("00")) {
-                n = n.substring(2)
-            }
+            let n = number.replace(/\D/g, "");
             if (n.length === 10 || n.length === 11) {
-                n = "55" + n
+                n = "55" + n;
             }
-            return n
+            return n;
+        }
+
+        function formatForDisplay(number) {
+            let n = number.replace(/\D/g, "");
+            if (n.length === 11) {
+                return `(${n.substring(0,2)}) ${n.substring(2,7)}-${n.substring(7)}`;
+            } else if (n.length === 10) {
+                return `(${n.substring(0,2)}) ${n.substring(2,6)}-${n.substring(6)}`;
+            }
+            return number;
         }
 
         function isValid(number) {
-            const cleaned = number.replace(/\D/g, "")
-            return cleaned.length >= 10
-        }
-
-        function formatDisplayNumber(number) {
-            let n = cleanNumber(number)
-            if (n.startsWith("55")) {
-                n = n.substring(2)
-            }
-            if (n.length === 11) {
-                return `(${n.substring(0, 2)}) ${n.substring(2, 7)}-${n.substring(7)}`
-            } else if (n.length === 10) {
-                return `(${n.substring(0, 2)}) ${n.substring(2, 6)}-${n.substring(6)}`
-            }
-            return n
+            const cleaned = number.replace(/\D/g, "");
+            return cleaned.length >= 10;
         }
 
         const updateUI = () => {
-            const value = phoneInput.value
-            const valid = isValid(value)
-            
-            submitBtn.disabled = !valid
-            phoneInput.classList.toggle("validated", valid)
-            submitBtn.classList.toggle("active", valid)
+            const value = phoneInput.value;
+            const valid = isValid(value);
+            submitBtn.disabled = !valid;
+            phoneInput.classList.toggle("valid", valid);
 
             if (valid) {
-                const formatted = formatDisplayNumber(value)
-                submitBtn.textContent = `Conversar com ${formatted}`
+                const display = formatForDisplay(value);
+                submitBtn.textContent = `Falar com ${display}`;
             } else {
-                submitBtn.textContent = "Iniciar conversa agora"
+                submitBtn.textContent = "Falar agora por WhatsApp";
             }
-        }
+        };
 
-        phoneInput.addEventListener("input", updateUI)
-        
-        phoneInput.addEventListener("paste", () => {
-            window.requestAnimationFrame(() => {
-                phoneInput.classList.add("pasted")
-                setTimeout(() => phoneInput.classList.remove("pasted"), 400)
-                updateUI()
-            })
-        })
+        phoneInput.addEventListener("input", updateUI);
 
         form.addEventListener("submit", (e) => {
-            e.preventDefault()
-            if (!isValid(phoneInput.value)) return
+            e.preventDefault();
+            if (!isValid(phoneInput.value)) return;
 
-            submitBtn.textContent = "Conectando..."
-            submitBtn.disabled = true
-            
-            const number = cleanNumber(phoneInput.value)
+            submitBtn.textContent = "Abrindo o WhatsApp...";
+            const number = cleanNumber(phoneInput.value);
             
             setTimeout(() => {
-                window.open("https://wa.me/" + number, "_blank", "noopener,noreferrer")
-                setTimeout(() => {
-                    submitBtn.disabled = false
-                    updateUI()
-                }, 1000)
-            }, 300)
-        })
+                window.location.href = `https://api.whatsapp.com/send?phone=${number}`;
+            }, 150);
+        });
     </script>
-
 </body>
 </html>
