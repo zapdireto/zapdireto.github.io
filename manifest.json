@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "ZapDireto",
+  "version": "1.0",
+  "description": "Abra conversas no WhatsApp sem salvar o contato.",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "favicon/favicon-96x96.png"
+  },
+  "permissions": [],
+  "icons": {
+    "48": "favicon/favicon-96x96.png",
+    "128": "favicon/favicon-96x96.png"
+  }
+}
