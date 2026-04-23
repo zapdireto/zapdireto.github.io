@@ -176,6 +176,7 @@
 
     <main class="main">
         <section class="hero-section">
+            
             <h1 class="hero-title">Fale no WhatsApp <span>sem precisar salvar o número.</span></h1>
             
             <div class="form-card">
@@ -197,8 +198,12 @@
                     </div>
 
                     <button id="submit" class="submit-btn" disabled>
-                        Falar agora por WhatsApp
+                        Abrir conversa no WhatsApp
                     </button>
+
+                    <p style="font-size:0.9rem; color:#6b8068; margin-top:10px;">
+                        Nunca mais lotar sua agenda com contatos que você nunca mais vai usar.
+                    </p>
                 </form>
             </div>
             
@@ -210,8 +215,8 @@
         </section>
 
         <section class="seo-content">
-            <h2>Dúvidas Frequentes</h2>
-
+            <h2>Como mandar mensagem no WhatsApp sem salvar o número</h2>
+            
             <div class="faq-block">
                 <h3>Como abrir conversa no WhatsApp sem salvar o contato?</h3>
                 <p>É muito simples: basta copiar o número desejado e colá-lo no campo acima. O ZapDireto remove automaticamente espaços, parênteses e traços, criando um link direto e seguro para o chat oficial do WhatsApp.</p>
@@ -295,7 +300,7 @@
                 const display = formatForDisplay(value);
                 submitBtn.textContent = `Falar com ${display}`;
             } else {
-                submitBtn.textContent = "Falar agora por WhatsApp";
+                submitBtn.textContent = "Abrir conversa no WhatsApp";
             }
         };
 
@@ -309,7 +314,7 @@
             const number = cleanNumber(phoneInput.value);
             
             setTimeout(() => {
-                window.location.href = `https://api.whatsapp.com/send?phone=${number}`;
+                window.location.href = `https://wa.me/${number}`;
             }, 150);
         });
     </script>
